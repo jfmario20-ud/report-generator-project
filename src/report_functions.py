@@ -14,32 +14,43 @@ def read_csv_file(filepath):
     Reads a CSV file and returns the data as a list of dictionaries.
     """
     # TODO: Your code here
+        try:
+            with open(filepath, "r") as file:
+                 return list(csv.DictReader(file))
+        except FileNotFoundError:
+            print(f"{filepath} not found. Starting with an empty csv file.")
+        except csv.Error:
+            print("Error reading CSV file.")
+
     # Hint: Use csv.DictReader to read CSV files into dictionaries
     # Hint: Remember to use 'with open()' for proper file handling
-    pass
 
 
 def count_records(data_list):
     """Counts the number of records in a dataset."""
     # TODO: Your code here
+  return len(data_list)
+
     # Hint: Use the len() function
-    pass
 
 
 def get_unique_values(data_list, field_name):
     """Gets all unique values for a specific field in the dataset."""
     # TODO: Your code here
+    unique_values = set()
+    for record in data_list:
+      unique_values.add(record[field_name])
+    return sorted(unique_values)
     # Hint: Use a set to collect unique values
     # Hint: Convert the set to a list and sort it before returning
-    pass
 
 
 def filter_by_field(data_list, field_name, field_value):
     """Filters records where a specific field matches a given value."""
     # TODO: Your code here
+    return [record for record in data_list if record[field_name] == field_value]
     # Hint: Use a list comprehension to filter or a loop!
     # see here for more info: https://docs.python.org/3.13/tutorial/datastructures.html#list-comprehensions
-    pass
 
 
 def calculate_total(data_list, field_name):
